@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.model.*;
 import com.example.demo.model.Runtime;
 import com.example.demo.service.*;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -35,7 +36,7 @@ public class RuntimeController {
 
     @GetMapping("/createRuntime")
     @ResponseBody
-    public String createRuntime(){
+    public ResponseEntity<Runtime> createRuntime(){
         Runtime rt = new Runtime();
         rt.setStateBegin(new Date());
         rt.setStateEnd(new Date());
@@ -67,7 +68,7 @@ public class RuntimeController {
 
         runtimeService.createRuntime(rt);
 
-        return "Runtime created successfully!";
+        return ResponseEntity.ok(rt);
 
 
 
