@@ -1,6 +1,9 @@
 package com.example.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity(name = "OrderTable")
 public class Order {
@@ -14,11 +17,9 @@ public class Order {
     private String orderName;
 
 
-
-
-    @OneToOne
-    @JoinColumn(name = "productId", referencedColumnName = "productId")
-    private Product product;
+    @OneToMany(mappedBy = "order")
+    @JsonIgnore
+    private List<Product> products;
 
     public Long getOrderId() {
         return orderId;
@@ -44,11 +45,12 @@ public class Order {
         this.orderName = orderName;
     }
 
-    public Product getProduct() {
-        return product;
+    public List<Product> getProducts() {
+        return products;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setProducts(List<Product> products) {
+        this.products = products;
+        products.forEach(product -> product.setOrder(this));
     }
 }

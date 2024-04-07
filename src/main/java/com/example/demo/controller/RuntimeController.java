@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 
 import java.util.Date;
+import java.util.List;
 
 @Controller
 public class RuntimeController {
@@ -49,8 +50,10 @@ public class RuntimeController {
 
         Order order = new Order();
         order.setOrderName("Order 1");
-        order.setProduct(product);
+        order.setProducts(List.of(product));
         orderService.createOrder(order);
+
+
 
         Workcenter wc = new Workcenter();
 

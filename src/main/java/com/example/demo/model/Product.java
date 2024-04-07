@@ -1,10 +1,8 @@
 package com.example.demo.model;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
 
 @Entity
 public class Product {
@@ -15,6 +13,10 @@ public class Product {
 
     private Long productNo;
     private String productName;
+
+    @ManyToOne
+    @JoinColumn(name = "orderId", referencedColumnName = "orderId")
+    private Order order;
 
     public long getProductId() {
         return productId;
@@ -38,6 +40,14 @@ public class Product {
 
     public void setProductName(String productName) {
         this.productName = productName;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
     }
 }
 
